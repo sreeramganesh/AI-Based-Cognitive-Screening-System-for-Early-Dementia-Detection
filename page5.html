@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cognitive Assessment Intro</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0d1117, #11151b);
+      color: #cce7ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: rgba(20, 25, 30, 0.95);
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 191, 255, 0.2);
+      text-align: center;
+      padding: 30px 50px;
+      width: 450px;
+    }
+
+    h1 {
+      color: #00bfff;
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #8fbfe0;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    ul {
+      text-align: left;
+      font-size: 14px;
+      margin: 15px 0;
+      padding-left: 20px;
+      color: #a8cfff;
+    }
+
+    h3 {
+      color: #00bfff;
+      margin-bottom: 8px;
+    }
+
+    button {
+      background-color: #00bfff;
+      border: none;
+      color: #0d1117;
+      padding: 10px 20px;
+      font-size: 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 600;
+      margin-top: 15px;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #1ec1ff;
+      box-shadow: 0 0 12px #00bfff;
+      transform: scale(1.05);
+    }
+
+    footer {
+      font-size: 13px;
+      color: #8fbfe0;
+      margin-top: 25px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Brain Icon" width="60">
+    <h1>AI Tool for Early-Stage Dementia Detection</h1>
+    <p>Welcome to the AI-Based Cognitive Screening System. This tool helps assess early signs of cognitive changes through speech, behavior, and reasoning tasks.</p>
+
+    <div class="instructions">
+      <h3>Before You Begin:</h3>
+      <ul>
+        <li>Find a quiet place with minimal background noise.</li>
+        <li>Ensure your microphone and camera are working.</li>
+        <li>Answer each task calmly — there are no right or wrong answers.</li>
+        <li>The session takes around 15–20 minutes.</li>
+        <li>Your responses are confidential and used only for analysis.</li>
+      </ul>
+    </div>
+
+    <button onclick="startAssessment()">Start Cognitive Assessment</button>
+
+    <footer>
+      Developed by <b>Star Coders </b><br>
+      Department of Information Technology<br>
+      Saranathan College of Engineering<br>
+      Powered by AI Speech and Behavioral Analytics
+    </footer>
+  </div>
+
+  <script>
+    function startAssessment() {
+      window.location.href = "page6.html";
+    }
+  </script>
+</body>
+</html>

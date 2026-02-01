@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dementia Home Support</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0d1117, #11151b);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      color: #cce7ff;
+    }
+
+    header {
+      width: 100%;
+      padding: 15px 30px;
+      background-color: #11151b;
+      color: #00bfff;
+      font-size: 1.3rem; 
+      font-weight: bold;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 191, 255, 0.2);
+    }
+
+    main {
+      max-width: 700px;
+      width: 100%;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #00bfff;
+      margin-bottom: 15px;
+      text-align: center;
+      font-size: 1.7rem;
+    }
+
+    .actions {
+      background-color: #12171d;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 191, 255, 0.2);
+      padding: 25px;
+      margin: 25px 0;
+      border: 1px solid #2c3e50;
+    }
+
+    .actions ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .actions li {
+      background-color: #11151b;
+      padding: 12px 15px;
+      margin-bottom: 12px;
+      border-radius: 10px;
+      font-size: 1rem;
+      color: #a8cfff;
+      border: 1px solid #2c3e50;
+      transition: background-color 0.3s ease, transform 0.2s;
+    }
+
+    .actions li:hover {
+      background-color: #00bfff;
+      color: #0d1117;
+      transform: scale(1.03);
+    }
+
+    b {
+      color: #00bfff;
+    }
+
+    footer {
+      text-align: center;
+      width: 100%;
+      padding: 10px;
+      background-color: #11151b;
+      color: #00bfff;
+      font-size: 0.9rem;
+      margin-top: auto;
+      box-shadow: 0 -2px 10px rgba(0, 191, 255, 0.3);
+    }
+  </style>
+</head>
+<script>
+function submitAssessment() {
+  fetch("http://127.0.0.1:5000/calculate_risk", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(userAnswers)
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.error) {
+      alert(data.error);
+      return;
+    }
+
+    let resultBox = document.getElementById("result");
+    resultBox.innerHTML = `
+      <h3>Assessment Result</h3>
+      <p><b>Risk Level:</b> ${data.risk_level}</p>
+      <p><b>Risk Percentage:</b> ${data.risk_percent}%</p>
+    `;
+  })
+  .catch(err => {
+    console.error(err);
+    alert("Error connecting to backend");
+  });
+}
+</script>
+
+
+<body> 
+  <header>🧠 Dementia Home Support</header>
+
+  <main>
+
+    <div class="actions"> 
+      <h2>Suggested Actions for Home</h2>
+      <ul>
+        <li>📝 <b>Daily Memory Exercise:</b> Recall 5 items from yesterday or a short story.</li>
+        <li>🧩 <b>Cognitive Games:</b> Solve simple puzzles, pattern tasks, or memory matching games.</li>
+        <li>📖 <b>Reading & Storytelling:</b> Read short stories or describe past events aloud.</li>
+        <li>🏃‍♂ <b>Physical Activity:</b> Walk 15–20 minutes daily to stimulate brain activity.</li>
+        <li>🗓 <b>Routine Check:</b> Keep a daily schedule with reminders for meals, medications, and appointments.</li>
+        <li>💬 <b>Social Interaction:</b> Talk with family or friends to maintain engagement.</li>
+        <li>🧘 <b>Relaxation & Sleep:</b> Practice calm breathing, meditation, and maintain consistent sleep patterns.</li>
+        <li>🍎 <b>Healthy Diet:</b> Eat brain-friendly foods like fruits, vegetables, nuts, and fish.</li>
+      </ul>
+    
+</div>
+
+  </main>
+ <button onclick="submitAssessment()">Submit</button>
+  <footer>
+    © 2025 AI Cognitive Screening Project | Developed by Star Coders
+  </footer>
+</body>
+</html>

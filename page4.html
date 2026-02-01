@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Dementia Detection System</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0d1117, #11151b);
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      color: #cce7ff;
+    }
+
+    header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #11151b;
+      color: #00bfff;
+      padding: 10px 30px;
+      box-sizing: border-box;
+    }
+
+    .app-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .nav-menu a {
+      color: #cce7ff;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 6px 10px;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .nav-menu a:hover {
+      background-color: #00bfff;
+      color: #0d1117;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .profile img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 2px solid #00bfff;
+    }
+
+    .profile-panel {
+      position: fixed;
+      top: 0;
+      right: -350px;
+      width: 300px;
+      height: 100%;
+      background-color: #11151b;
+      box-shadow: -3px 0 10px rgba(0, 191, 255, 0.3);
+      padding: 20px;
+      box-sizing: border-box;
+      transition: right 0.3s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      z-index: 1000;
+      color: #cce7ff;
+    }
+
+    .profile-panel.active {
+      right: 0;
+    }
+
+    .profile-panel h2 {
+      color: #00bfff;
+      margin-bottom: 10px;
+    }
+
+    label {
+      font-size: 0.9rem;
+      margin-top: 10px;
+      color: #a8cfff;
+    }
+
+    input, select {
+      padding: 8px;
+      margin-top: 4px;
+      border-radius: 6px;
+      border: 1px solid #2c3e50;
+      width: 100%;
+      font-size: 0.95rem;
+      background: #12171d;
+      color: #cce7ff;
+    }
+
+    .close-btn {
+      align-self: flex-end;
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: #00bfff;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.3rem;
+      color: #00bfff;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    p {
+      color: #a8cfff;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin-bottom: 35px;
+    }
+
+    button {
+      background-color: #00bfff;
+      color: #0d1117;
+      border: none;
+      padding: 14px 35px;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s;
+    }
+
+    button:hover {
+      background-color: #1ec1ff;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #11151b;
+      color: #00bfff;
+      font-size: 0.9rem;
+    }
+
+    @media(max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .nav-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="app-title">🧠 AI Dementia Detection System</div>
+
+    <nav class="nav-menu">
+      <a href="page4.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="page7.html">Suggested Actions</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="profile" onclick="toggleProfile()">
+      <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile Icon" />
+    </div>
+  </header>
+
+  <div id="profilePanel" class="profile-panel">
+    <button class="close-btn" onclick="toggleProfile()">✖</button>
+    <h2>User Profile</h2>
+    <label for="name">Name:</label>
+    <input type="text" id="name" placeholder="Enter your name" />
+    <label for="age">Age:</label>
+    <input type="number" id="age" placeholder="Enter your age" />
+    <label for="dob">Date of Birth:</label>
+    <input type="date" id="dob" />
+    <label for="gender">Gender:</label>
+    <select id="gender">
+      <option value="">Select</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+    <label for="email">Email:</label>
+    <input type="email" id="email" placeholder="Enter your email" />
+  </div>
+
+  <main>
+    <h1> Welcome to the AI - Based Cognitive Screening Tool </h1>
+    <p>
+      Get ready to begin your cognitive assessment. This includes a series of 10 interactive questions designed to evaluate various cognitive abilities such as reasoning, memory, and logic.
+    </p>
+    <button onclick="startAssessment()">Start Assessment</button>
+  </main>
+
+  <footer>
+    © 2025 AI Cognitive Screening Project | Developed by Star Coders
+  </footer>
+
+  <script>
+    function toggleProfile() {
+      const panel = document.getElementById("profilePanel");
+      panel.classList.toggle("active");
+    }
+
+    function startAssessment() {
+      window.location.href = "page5.html";
+    }
+  </script>
+</body>
+</html>

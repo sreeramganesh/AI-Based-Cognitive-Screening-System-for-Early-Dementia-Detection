@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dementia Risk Assessment</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #0d1117, #11151b);
+      color: #cce7ff;
+      text-align: center;
+      padding: 40px;
+      margin: 0;
+    }
+    .container {
+      max-width: 850px;
+      margin: auto;
+      background-color: rgba(20, 25, 30, 0.95);
+      padding: 35px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 191, 255, 0.2);
+    }
+    h2 {
+      color: #00bfff;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #8fbfe0;
+      font-size: 17px;
+      white-space: pre-line;
+    }
+    button {
+      background-color: #00bfff;
+      color: #0d1117;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 10px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    button:hover {
+      background-color: #1ec1ff;
+      box-shadow: 0 0 12px #00bfff;
+      transform: scale(1.05);
+    }
+    img {
+      width: 400px;
+      border-radius: 10px;
+      margin-top: 20px;
+      display: none;
+      box-shadow: 0 0 10px rgba(0, 191, 255, 0.3);
+    }
+    textarea {
+      width: 90%;
+      height: 120px;
+      padding: 10px;
+      border-radius: 10px;
+      border: 2px solid #2c3e50;
+      background: #12171d;
+      color: #cce7ff;
+      font-size: 15px;
+      display: none;
+      margin-top: 15px;
+    }
+    textarea:focus {
+      border-color: #00bfff;
+      box-shadow: 0 0 5px #00bfff;
+      outline: none;
+    }
+    #timer {
+      font-weight: bold;
+      margin-top: 15px;
+      color: #a8cfff;
+    }
+    .options {
+      display: none;
+      margin-top: 15px;
+      text-align: left;
+      padding-left: 20%;
+    }
+    .options label {
+      display: block;
+      margin: 8px 0;
+      font-size: 16px;
+      color: #a8cfff;
+    }
+    .options input[type="radio"] {
+      accent-color: #00bfff;
+    }
+    #sequenceAnswers {
+      display: none;
+      margin-top: 15px;
+      text-align: left;
+      padding-left: 10%;
+    }
+    .seq {
+      margin: 15px 0;
+      color: #a8cfff;
+    }
+    .seq input {
+      width: 60%;
+      padding: 8px;
+      border-radius: 8px;
+      border: 2px solid #2c3e50;
+      background: #12171d;
+      color: #cce7ff;
+      font-size: 15px;
+    }
+    .seq input:focus {
+      border-color: #00bfff;
+      box-shadow: 0 0 5px #00bfff;
+      outline: none;
+    }
+    #objectRecall {
+      display: none;
+      margin-top: 15px;
+    }
+    #objectRecall textarea {
+      display: block;
+      width: 90%;
+      height: 80px;
+      margin: 10px auto;
+      border-radius: 10px;
+      border: 2px solid #2c3e50;
+      background: #12171d;
+      color: #cce7ff;
+      font-size: 15px;
+      padding: 10px;
+    }
+    #objectRecall textarea:focus {
+      border-color: #00bfff;
+      box-shadow: 0 0 5px #00bfff;
+      outline: none;
+    }
+    #resultEl {
+      margin-top: 25px;
+      font-size: 18px;
+      color: #8fbfe0;
+    }
+    #patternDisplay {
+      font-size: 40px;
+      letter-spacing: 15px;
+      margin-top: 30px;
+      display: none;
+      color: #00bfff;
+      text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+    }
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #00bfff;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #1ec1ff;
+    }
+  </style>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2 id="taskTitle">1. Picture Description Task</h2>
+    <p id="taskDescription"></p>
+    <div id="patternDisplay">★ ⬛ ▲ ⬜ ★</div>
+    <img id="taskImage" src="" alt="Task Image" />
+    <div id="timer"></div>
+
+    <div class="options" id="optionsBox">
+      <label><input type="radio" name="option" value="A" /> A. ★ ▲ ⬛ ⬜ ★</label>
+      <label><input type="radio" name="option" value="B" /> B. ★ ⬛ ▲ ⬜ ★</label>
+      <label><input type="radio" name="option" value="C" /> C. ⬜ ▲ ★ ⬛ ★</label>
+    </div>
+
+    <div id="sequenceAnswers">
+      <div class="seq">
+        <b>Sequence I:</b> 2, 4, 3, 6, 5, 10, _<br />
+        <input type="text" placeholder="Your answer for Sequence I">
+      </div>
+      <div class="seq">
+        <b>Sequence II:</b> 10, 13, 17, 22, 28, _<br />
+        <input type="text" placeholder="Your answer for Sequence II">
+      </div>
+      <div class="seq">
+        <b>Sequence III:</b> 1, 1, 2, 3, 5, 8, _<br />
+        <input type="text" placeholder="Your answer for Sequence III">
+      </div>
+    </div>
+
+    <div id="objectRecall">
+      <textarea placeholder="Describe what you remember from the picture..."></textarea>
+    </div>
+
+    <textarea id="answerBox" placeholder="Type your answer here..."></textarea>
+    <br />
+    <button id="recordBtn" style="display: none;">🎙 Record Voice</button>
+    <br />
+    <button id="nextBtn">Next</button>
+    <div id="resultEl"></div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        title: "1. Picture Description Task",
+        instruction: "Instruction: “Look at this picture and describe what you see in as much detail as possible.”",
+        image: "picture.jpeg",
+        type: "text",
+      },
+      {
+        title: "2. Story Reading and Word Repetition Detection",
+        instruction: "Instruction: “Read the short story below carefully. After reading, identify the repeated words.”",
+        text: "The Lost Umbrella\n\nRiya was walking to college when it started to rain. She opened her umbrella and hurried down the road. Suddenly, the umbrella broke in the wind, and Riya ran to a nearby shop. The shopkeeper smiled and offered her another umbrella.\n\nRiya thanked him, bought the new umbrella, and continued walking to college with a smile.",
+        type: "text",
+      },
+      {
+        title: "3. Word Fluency Test",
+        instruction: "Instruction: “Say as many words as you can that begin with the letter S within one minute.”",
+        type: "voice",
+      },
+      {
+        title: "4. Visual Memory",
+        instruction: "Instruction: “Look carefully at this pattern of shapes for a few seconds. After it disappears, choose the correct pattern below.”",
+        type: "patternMemory",
+      },
+      {
+        title: "5. Problem-Solving and Conditional Logic",
+        instruction: "Instruction: “Read the situation and answer the question.”\nScenario: A shop sells pencils at $2 each and notebooks at $5 each. You have $20 and want at least 2 notebooks. How many pencils can you buy at most?”",
+        type: "text",
+      },
+      {
+        title: "6. Object-Location Recall",
+        instruction: "Instruction: “You will see objects placed on a grid for 15 seconds. After it disappears, recall and describe their positions.”",
+        image: "your-image.jpg",
+        type: "objectRecall",
+      },
+      {
+        title: "7. Sentence Repetition Task",
+        instruction: "Instruction: “Please repeat this sentence exactly: ‘The quick brown fox jumps over the lazy dog.’ ”",
+        type: "voice",
+      },
+      {
+        title: "8. Critical Thinking Scenario",
+        instruction: "Instruction: “You will read a story that ends suddenly. Think logically and complete the story.”\n\nScenario: It was nearly 10:30 p.m. when Arun left his friend's house. The street was quiet, and most of the shops were already closed. As he walked down the narrow lane toward his home, the streetlights suddenly went out, leaving the path completely dark.He could still hear his footsteps echoing against the walls - but then he noticed another sound. Someone else was walking behind him, slowly at first, then a bit faster. When Arun stopped, the footsteps also stopped. His phone battery was almost dead, and there were no houses nearby with lights on. The sound of footsteps grew louder again. He could feel his heart beating faster as he tried to decide what to do next. Question: What should Arun do in this situation to stay safe?",
+        type: "text",
+      },
+      {
+        title: "9. Delayed Recall Task",
+        instruction: "Instruction: “Earlier, you read a story. Recall the word that appeared most frequently in that story.”",
+        type: "text",
+      },
+      {
+        title: "10. Pattern Continuation and Logical Reasoning Task",
+        instruction: "Instruction: “Look carefully at the number sequences below and find the next number in each.”",
+        type: "sequence",
+      },
+    ];
+
+    let index = 0;
+    let activeTimers = [];
+    const userAnswers = {}; 
+
+    const titleEl = document.getElementById("taskTitle");
+    const descEl = document.getElementById("taskDescription");
+    const imgEl = document.getElementById("taskImage");
+    const answerBox = document.getElementById("answerBox");
+    const nextBtn = document.getElementById("nextBtn");
+    const recordBtn = document.getElementById("recordBtn");
+    const optionsBox = document.getElementById("optionsBox");
+    const seqAns = document.getElementById("sequenceAnswers");
+    const seqInputs = seqAns.querySelectorAll("input");
+    const objectRecall = document.getElementById("objectRecall");
+    const objectTextarea = objectRecall.querySelector("textarea");
+    const timerEl = document.getElementById("timer");
+    const patternEl = document.getElementById("patternDisplay");
+    const resultEl = document.getElementById("resultEl");
+
+    function clearAllTimers() {
+      activeTimers.forEach(t => clearInterval(t));
+      activeTimers = [];
+    }
+
+    function showQuestion(i) {
+      clearAllTimers();
+      const q = questions[i];
+
+      titleEl.innerText = q.title;
+      descEl.innerText = q.instruction + (q.text ? "\n\n" + q.text : "");
+      timerEl.innerText = "";
+      imgEl.style.display = "none";
+      answerBox.style.display = "none";
+      recordBtn.style.display = "none";
+      optionsBox.style.display = "none";
+      seqAns.style.display = "none";
+      objectRecall.style.display = "none";
+      patternEl.style.display = "none";
+      answerBox.value = "";
+      objectTextarea.value = "";
+      seqInputs.forEach(i => i.value = "");
+      document.querySelectorAll('input[name="option"]').forEach(r => r.checked = false);
+
+      if (q.image) {
+        imgEl.src = q.image;
+        imgEl.style.display = "block";
+      }
+
+      if (q.type === "voice") {
+        recordBtn.style.display = "inline-block";
+      } else if (q.type === "text") {
+        answerBox.style.display = "block";
+      } else if (q.type === "sequence") {
+        seqAns.style.display = "block";
+      } else if (q.type === "objectRecall") {
+        let timeLeft = 15;
+        timerEl.innerText = "Image visible for " + timeLeft + " seconds...";
+        const countdown = setInterval(() => {
+          timeLeft--;
+          timerEl.innerText = "Image visible for " + timeLeft + " seconds...";
+          if (timeLeft <= 0) {
+            clearInterval(countdown);
+            imgEl.style.display = "none";
+            timerEl.innerText = "Time’s up! Recall what you saw.";
+            objectRecall.style.display = "block";
+          }
+        }, 1000);
+        activeTimers.push(countdown);
+      } else if (q.type === "patternMemory") {
+        patternEl.style.display = "block";
+        let timeLeft = 10;
+        timerEl.innerText = "Look at the pattern (" + timeLeft + "s remaining)";
+        const countdown = setInterval(() => {
+          timeLeft--;
+          timerEl.innerText = "Look at the pattern (" + timeLeft + "s remaining)";
+          if (timeLeft <= 0) {
+            clearInterval(countdown);
+            patternEl.style.display = "none";
+            timerEl.innerText = "Pattern hidden! Choose the correct one.";
+            optionsBox.style.display = "block";
+          }
+        }, 1000);
+        activeTimers.push(countdown);
+      }
+
+      nextBtn.innerText = i === questions.length - 1 ? "Submit" : "Next";
+    }
+
+    nextBtn.addEventListener("click", async () => {
+      clearAllTimers();
+      const current = questions[index];
+      let answer = "";
+
+      if (current.type === "text") answer = answerBox.value.trim();
+      else if (current.type === "voice") answer = "(voice recorded)";
+      else if (current.type === "sequence") answer = Array.from(seqInputs).map(i => i.value.trim()).join(", ");
+      else if (current.type === "objectRecall") answer = objectTextarea.value.trim();
+      else if (current.type === "patternMemory") {
+        const selected = document.querySelector('input[name="option"]:checked');
+        answer = selected ? selected.value : "";
+      }
+
+      userAnswers[current.title.replace(/^\d+\.\s*/, "")] = answer;
+
+      if (index < questions.length - 1) {
+        index++;
+        showQuestion(index);
+      } else {
+        titleEl.innerText = "All tasks completed!";
+        descEl.innerText = "";
+        imgEl.style.display = "none";
+        patternEl.style.display = "none";
+        answerBox.style.display = "none";
+        recordBtn.style.display = "none";
+        optionsBox.style.display = "none";
+        seqAns.style.display = "none";
+        objectRecall.style.display = "none";
+        nextBtn.style.display = "none";
+        timerEl.style.display = "none";
+        resultEl.innerText = " Calculating dementia risk...";
+
+        try {
+          const response = await fetch("http://127.0.0.1:5000/calculate_risk", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(userAnswers),
+          });
+          const data = await response.json();
+
+           resultEl.innerHTML = `
+           <b>Dementia Risk Assessment Result:</b><br>
+           Risk Level: <b>${data.risk_level}</b><br>
+           Overall Score: ${data.risk_percent.toFixed(2)}%<br><br>
+           <b>Task Breakdown:</b><br>
+           ${Object.entries(data.task_scores)
+          .map(([task, score]) => `${task}: ${score}`)
+          .join("<br>")}
+       `;
+
+        } catch (err) {
+          console.error(err);
+          resultEl.innerText = " Error connecting to backend. Please ensure Flask is running.";
+        }
+      }
+    });
+
+    recordBtn.addEventListener("click", () => {
+      alert("🎙 Voice recording started (simulation).");
+    });
+
+    window.onload = () => showQuestion(index);
+  </script>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
