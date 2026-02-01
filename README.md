@@ -84,10 +84,13 @@ This project introduces an AI-driven cognitive screening platform that:
 - spaCy  
 
 ### Speech Processing
-- Speech-to-Text API  
+- Speech-to-Text API
+  
+---
 
-### Deployment
-- Google Cloud / AWS  
+##  Future Enhancements
+- Deployment of the application on cloud platforms such as AWS or Google Cloud
+- Online access for remote cognitive screening
 
 ---
 ##  Output
