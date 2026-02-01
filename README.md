@@ -1,5 +1,22 @@
 # AI-Based Cognitive Screening System for Early Dementia Detection
 
+# Dementia Risk Assessment System 🧠
+
+A web-based cognitive assessment system that evaluates dementia risk using task-based scoring and a Machine Learning model.
+
+This project was developed as a **team project** by **STAR CODERS**.
+
+---
+
+## 👥 Team – STAR CODERS
+
+- **Keerthiga S** – Backend Development and Database Management 
+- **Sreeram Ganesh S** – Backend Development , ML & Model Training    
+- **Vairavan S** – Frontend Development    
+- **Kathiravan G** – Designing and Frontend Development 
+
+---
+
 ##  Project Overview
 The **AI-Based Cognitive Screening System** is a web-based application designed to assist in the early detection of dementia by analyzing speech characteristics, cognitive task performance, and behavioral response patterns. Dementia is a progressive neurological condition where early symptoms are often subtle and mistaken for normal aging, leading to delayed diagnosis. This project aims to address that gap by providing an accessible, affordable, and non-clinical screening solution using artificial intelligence.
 
@@ -91,20 +108,16 @@ This project introduces an AI-driven cognitive screening platform that:
 ##  Future Enhancements
 - Deployment of the application on cloud platforms such as AWS or Google Cloud
 - Online access for remote cognitive screening
+- Use of deep learning models  
+- Integration with wearable devices  
+- Expansion to detect other cognitive disorders
 
 ---
 ##  Output
 - Personalized dementia risk score  
 - Cognitive performance summary  
 - Speech and behavioral analysis report  
-
----
-
-##  Future Enhancements
-- Use of deep learning models  
-- Integration with wearable devices  
-- Expansion to detect other cognitive disorders  
-
+  
 ---
 
 ##  Impact and Benefits
